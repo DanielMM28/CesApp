@@ -21,10 +21,8 @@ app.use(express.json());
 AppDataSource.initialize()
   .then(() => {
     console.log("✅ Conectado a la base de datos MySQL");
-
-app.use(express.json());
+app.use(express.json()); // NECESARIO para parsear application/json
 app.use(express.urlencoded({ extended: true }));
-
     app.use("/Aprendices", aprendizRoutes);
    app.use("/fichas", fichaRoutes);
    app.use("/Usuarios",UsuariosRoutes);
