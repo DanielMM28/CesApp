@@ -5,17 +5,17 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
+  PrimaryGeneratedColumn,
 } from "typeorm";
+import { Area } from "./Area"; // Asegúrate de crear/tener esta entidad
+import { Rol } from "./Rol";   // Asegúrate de crear/tener esta entidad
 import { Asistente } from "./Asistente";
-import { Area } from "./Area";
-import { Rol } from "./Rol";
-import { UsuFic } from "./UsuFic";
 
-@Index("AreaIDFK", ["areaIdfk"], {})
-@Index("RolIDFK", ["rolIdfk"], {})
+@Index("AreaID", ["areaId"], {})
+@Index("RolID", ["rolId"], {})
 @Entity("usuario", { schema: "bdcomite" })
 export class Usuario {
-  @Column("int", { primary: true, name: "UsuID" })
+  @PrimaryGeneratedColumn({ type: "int", name: "UsuID" })
   usuId: number;
 
   @Column("varchar", { name: "UsuNom", length: 100 })
@@ -39,32 +39,32 @@ export class Usuario {
   @Column("varchar", { name: "UsuCon", length: 100 })
   usuCon: string;
 
-  @Column("int", { name: "AreaIDFK", nullable: true })
-  areaIdfk: number | null;
+  // --- Columnas de Claves Foráneas (IDs explícitos) ---
+  @Column("int", { name: "AreaID", nullable: true })
+  areaId: number | null;
 
-  @Column("int", { name: "RolIDFK", nullable: true })
-  rolIdfk: number | null;
+  @Column("int", { name: "RolID", nullable: true })
+  rolId: number | null;
 
-  @OneToMany(() => Asistente, (asistente) => asistente.usuIdfk2)
-  asistentes: Asistente[];
+  // --- Relaciones (Objetos) ---
 
+  // Relación con Area
   @ManyToOne(() => Area, (area) => area.usuarios, {
     onDelete: "RESTRICT",
     onUpdate: "RESTRICT",
   })
-  @JoinColumn([{ name: "AreaIDFK", referencedColumnName: "areaId" }])
-  areaIdfk2: Area;
+  @JoinColumn([{ name: "AreaID", referencedColumnName: "areaId" }])
+  area: Area;
 
+  // Relación con Rol
   @ManyToOne(() => Rol, (rol) => rol.usuarios, {
     onDelete: "RESTRICT",
     onUpdate: "RESTRICT",
   })
-  @JoinColumn([{ name: "RolIDFK", referencedColumnName: "rolId" }])
-  rolIdfk2: Rol;
+  @JoinColumn([{ name: "RolID", referencedColumnName: "rolId" }])
+  rol: Rol;
 
-  @OneToMany(() => UsuFic, (usuFic) => usuFic.usuIdfk2)
-  usuFics: UsuFic[];
-
-  @OneToMany(() => UsuFic, (usuFic) => usuFic.usuIdfk3)
-  usuFics2: UsuFic[];
+  // Relación inversa con Asistente (Necesaria para que tu archivo Asistente.ts funcione)
+  @OneToMany(() => Asistente, (asistente) => asistente.usuIdfk2)
+  asistentes: Asistente[];
 }

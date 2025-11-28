@@ -16,10 +16,10 @@ export class Resultadoaprendizaje {
   @Column("int", { primary: true, name: "ResCod" })
   resCod: number;
 
-  @Column("text", { name: "ResDes", nullable: true })
+  @Column("text", { name: "ResDes", nullable: false})
   resDes: string | null;
 
-  @Column("int", { name: "ComCodFK", nullable: true })
+  @Column("int", { name: "ComCodFK", nullable: false })
   comCodFk: number | null;
 
   @OneToMany(

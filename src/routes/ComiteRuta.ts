@@ -1,8 +1,9 @@
 import express from "express";
-import { AprendizController } from "../controllers/AprendizController";
+
+import { ComiteController } from "../controllers/ComiteController";
 
 const router = express.Router();
-const controller = new AprendizController();
+const controller = new ComiteController();
 
 router.get("/", controller.obtenerTodos);
 
@@ -13,7 +14,5 @@ router.post("/", controller.crear);
 router.put("/:id", controller.actualizar);
 
 router.delete("/:id", controller.eliminar);
-
-
 
 export default router;

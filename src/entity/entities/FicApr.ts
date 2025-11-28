@@ -14,10 +14,10 @@ export class FicApr {
   @Column("int", { primary: true, name: "FicCodFK" })
   ficCodFk: number;
 
-  @Column("date", { name: "FecEstado", nullable: true })
+  @Column("date", { name: "FecEstado",  nullable: false})
   fecEstado: string | null;
 
-  @Column("int", { name: "EstIDFK", nullable: true })
+  @Column("int", { name: "EstIDFK",  nullable: false })
   estIdfk: number | null;
 
   @ManyToOne(() => Estado, (estado) => estado.ficAprs, {

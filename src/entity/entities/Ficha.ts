@@ -15,37 +15,37 @@ import { UsuFic } from "./UsuFic";
 @Entity("ficha", { schema: "bdcomite" })
 export class Ficha {
   @Column("int", { primary: true, name: "FicID" })
-  ficId: number;
+  ficId: string;
 
-  @Column("date", { name: "FicFecIni", nullable: true })
+  @Column("date", { name: "FicFecIni",  nullable: false })
   ficFecIni: string | null;
 
-  @Column("date", { name: "FicFecFin", nullable: true })
+  @Column("date", { name: "FicFecFin", nullable: false })
   ficFecFin: string | null;
 
-  @Column("varchar", { name: "FicEst", nullable: true, length: 50 })
+  @Column("varchar", { name: "FicEst",  nullable: false, length: 50 })
   ficEst: string | null;
 
-  @Column("varchar", { name: "FicMod", nullable: true, length: 50 })
+  @Column("varchar", { name: "FicMod",  nullable: false, length: 50 })
   ficMod: string | null;
 
-  @Column("varchar", { name: "FicJor", nullable: true, length: 50 })
+  @Column("varchar", { name: "FicJor", nullable: false, length: 50 })
   ficJor: string | null;
 
-  @Column("int", { name: "FicCant", nullable: true })
+  @Column("int", { name: "FicCant", nullable: false })
   ficCant: number | null;
 
-  @Column("int", { name: "ProIDFK", nullable: true })
+  @Column("int", { name: "ProID",  nullable: false })
   proIdfk: number | null;
 
-  @OneToMany(() => Acta, (acta) => acta.ficIdfk2)
+  @OneToMany(() => Acta, (acta) => acta.ficId)
   actas: Acta[];
 
   @ManyToOne(() => Programa, (programa) => programa.fichas, {
     onDelete: "RESTRICT",
     onUpdate: "RESTRICT",
   })
-  @JoinColumn([{ name: "ProIDFK", referencedColumnName: "proId" }])
+  @JoinColumn([{ name: "ProID", referencedColumnName: "proId" }])
   proIdfk2: Programa;
 
   @OneToMany(() => FicApr, (ficApr) => ficApr.ficCodFk2)

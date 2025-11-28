@@ -7,10 +7,10 @@ export class Competencia {
   @Column("int", { primary: true, name: "ComCod" })
   comCod: number;
 
-  @Column("varchar", { name: "ComNomCor", nullable: true, length: 100 })
+  @Column("varchar", { name: "ComNomCor", nullable: false, length: 100 })
   comNomCor: string | null;
 
-  @Column("varchar", { name: "ComNomLar", nullable: true, length: 150 })
+  @Column("varchar", { name: "ComNomLar",  nullable: false, length: 150 })
   comNomLar: string | null;
 
  @OneToMany(() => ProCom, (proCom) => proCom.competencia)

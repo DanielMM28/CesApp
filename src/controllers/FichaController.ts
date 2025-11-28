@@ -1,16 +1,11 @@
-import { Request, Response } from "express";
+import { Repository } from "typeorm";
 import { AppDataSource } from "../database";
-import { Ficha } from "../entity/entities/Ficha";
+import { Ficha} from "../entity/entities/Ficha";
+import { BaseController } from "./BaseController";
 
-const fichaRepo = AppDataSource.getRepository(Ficha);
-
-export const obtenerFichas = async (req: Request, res: Response) => {
-  try {
-    console.log("🔎 Consultando fichas...");
-    const fichas = await fichaRepo.find();
-    res.json(fichas);
-  } catch (error) {
-    console.error("❌ Error al obtener fichas:", error);
-    res.status(500).json({ mensaje: "Error al obtener fichas" });
+export class FichaController extends BaseController<Ficha> {
+  constructor() {
+    const repository: Repository<Ficha> = AppDataSource.getRepository(Ficha);
+    super(repository, "ficId"); 
   }
-};
+}

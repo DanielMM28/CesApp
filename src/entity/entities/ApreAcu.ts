@@ -12,7 +12,7 @@ export class ApreAcu {
   @Column("varchar", { primary: true, name: "AcuDocFK", length: 20 })
   acuDocFk: string;
 
-  @Column("varchar", { name: "Parentesco", nullable: true, length: 50 })
+  @Column("varchar", { name: "Parentesco",  nullable: false, length: 50 })
   parentesco: string | null;
 
   @ManyToOne(() => Acudiente, (acudiente) => acudiente.apreAcus, {

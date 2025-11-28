@@ -19,20 +19,20 @@ export class Centro {
   @Column("varchar", { name: "CenDes", nullable: true, length: 100 })
   cenDes: string | null;
 
-  @Column("int", { name: "MunIDFK", nullable: true })
+  @Column("int", { name: "MunID", nullable: true })
   munIdfk: number | null;
 
   @Column("int", { name: "CenIDFK", nullable: true })
   cenIdfk: number | null;
 
-  @OneToMany(() => Acta, (acta) => acta.cenIdfk2)
+  @OneToMany(() => Acta, (acta) => acta.cenId)
   actas: Acta[];
 
   @ManyToOne(() => Municipio, (municipio) => municipio.centros, {
     onDelete: "RESTRICT",
     onUpdate: "RESTRICT",
   })
-  @JoinColumn([{ name: "MunIDFK", referencedColumnName: "munId" }])
+  @JoinColumn([{ name: "MunID", referencedColumnName: "munId" }])
   munIdfk2: Municipio;
 
   @ManyToOne(() => Centro, (centro) => centro.centros, {

@@ -17,7 +17,7 @@ export class Asistente {
   @PrimaryGeneratedColumn({ type: "int", name: "AsiID" })
   asiId: number;
 
-  @Column("int", { name: "UsuIDFK", nullable: true })
+  @Column("int", { name: "UsuID", nullable: false })
   usuIdfk: number | null;
 
   @OneToMany(() => Acta, (acta) => acta.asiIdfk2)
@@ -27,7 +27,7 @@ export class Asistente {
     onDelete: "RESTRICT",
     onUpdate: "RESTRICT",
   })
-  @JoinColumn([{ name: "UsuIDFK", referencedColumnName: "usuId" }])
+  @JoinColumn([{ name: "UsuID", referencedColumnName: "usuId" }])
   usuIdfk2: Usuario;
 
   @OneToMany(() => Compromisos, (compromisos) => compromisos.asiIdfk2)

@@ -3,26 +3,21 @@ import {
   Entity,
   Index,
   JoinColumn,
-  ManyToMany,
   ManyToOne,
-  OneToMany,
+  PrimaryGeneratedColumn,
 } from "typeorm";
-import { Comite } from "./Comite";
-import { Centro } from "./Centro";
+import { Comite } from "./Comite";     // Asegúrate de crear esta entidad
+import { Centro } from "./Centro";     // Asegúrate de crear esta entidad
 import { Asistente } from "./Asistente";
-import { Ficha } from "./Ficha";
-import { Invitado } from "./Invitado";
-import { Llamadodeatencion } from "./Llamadodeatencion";
-import { Plandemejoramiento } from "./Plandemejoramiento";
-import { Prevenciondedesercion } from "./Prevenciondedesercion";
+import { Ficha } from "./Ficha";       // Asegúrate de crear esta entidad
 
-@Index("ComIdFK", ["comIdFk"], {})
-@Index("CenIDFK", ["cenIdfk"], {})
-@Index("AsiIDFK", ["asiIdfk"], {})
-@Index("FicIDFK", ["ficIdfk"], {})
+@Index("ComId", ["comId"], {})
+@Index("CenID", ["cenId"], {})
+@Index("AsiID", ["asiId"], {})
+@Index("FicID", ["ficId"], {})
 @Entity("acta", { schema: "bdcomite" })
 export class Acta {
-  @Column("int", { primary: true, name: "ActID" })
+  @PrimaryGeneratedColumn({ type: "int", name: "ActID" })
   actId: number;
 
   @Column("varchar", { name: "ActTema", nullable: true, length: 255 })
@@ -52,64 +47,49 @@ export class Acta {
   @Column("time", { name: "ActHoraInicio", nullable: true })
   actHoraInicio: string | null;
 
-  @Column("int", { name: "ComIdFK", nullable: true })
-  comIdFk: number | null;
+  // --- Columnas de IDs (Foreign Keys explícitas) ---
 
-  @Column("int", { name: "CenIDFK", nullable: true })
-  cenIdfk: number | null;
+  @Column("int", { name: "ComId", nullable: true })
+  comId: number | null;
 
-  @Column("int", { name: "AsiIDFK", nullable: true })
-  asiIdfk: number | null;
+  @Column("int", { name: "CenID", nullable: true })
+  cenId: number | null;
 
-  @Column("int", { name: "FicIDFK", nullable: true })
-  ficIdfk: number | null;
+  @Column("int", { name: "AsiID", nullable: true })
+  asiId: number | null;
+
+  @Column("int", { name: "FicID", nullable: true })
+  ficId: number | null;
+
+  // --- Relaciones (Objetos) ---
 
   @ManyToOne(() => Comite, (comite) => comite.actas, {
     onDelete: "RESTRICT",
     onUpdate: "RESTRICT",
   })
-  @JoinColumn([{ name: "ComIdFK", referencedColumnName: "comId" }])
-  comIdFk2: Comite;
+  @JoinColumn([{ name: "ComId", referencedColumnName: "comId" }])
+  comite: Comite;
 
   @ManyToOne(() => Centro, (centro) => centro.actas, {
     onDelete: "RESTRICT",
     onUpdate: "RESTRICT",
   })
-  @JoinColumn([{ name: "CenIDFK", referencedColumnName: "cenId" }])
-  cenIdfk2: Centro;
+  @JoinColumn([{ name: "CenID", referencedColumnName: "cenId" }])
+  centro: Centro;
 
+  // Relación con Asistente
+  // IMPORTANTE: Se llama asiIdfk2 para coincidir con el @OneToMany de tu archivo Asistente.ts
   @ManyToOne(() => Asistente, (asistente) => asistente.actas, {
     onDelete: "RESTRICT",
     onUpdate: "RESTRICT",
   })
-  @JoinColumn([{ name: "AsiIDFK", referencedColumnName: "asiId" }])
+  @JoinColumn([{ name: "AsiID", referencedColumnName: "asiId" }])
   asiIdfk2: Asistente;
 
   @ManyToOne(() => Ficha, (ficha) => ficha.actas, {
     onDelete: "RESTRICT",
     onUpdate: "RESTRICT",
   })
-  @JoinColumn([{ name: "FicIDFK", referencedColumnName: "ficId" }])
-  ficIdfk2: Ficha;
-
-  @ManyToMany(() => Invitado, (invitado) => invitado.actas)
-  invitados: Invitado[];
-
-  @OneToMany(
-    () => Llamadodeatencion,
-    (llamadodeatencion) => llamadodeatencion.actIdfk2
-  )
-  llamadodeatencions: Llamadodeatencion[];
-
-  @OneToMany(
-    () => Plandemejoramiento,
-    (plandemejoramiento) => plandemejoramiento.actIdfk2
-  )
-  plandemejoramientos: Plandemejoramiento[];
-
-  @OneToMany(
-    () => Prevenciondedesercion,
-    (prevenciondedesercion) => prevenciondedesercion.actIdfk2
-  )
-  prevenciondedesercions: Prevenciondedesercion[];
+  @JoinColumn([{ name: "FicID", referencedColumnName: "ficId" }])
+  ficha: Ficha;
 }

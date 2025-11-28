@@ -18,16 +18,16 @@ export class Compromisos {
   @Column("varchar", { name: "ComAct", nullable: true, length: 200 })
   comAct: string | null;
 
-  @Column("date", { name: "ComFec", nullable: true })
+  @Column("date", { name: "ComFec",  nullable: false })
   comFec: string | null;
 
-  @Column("varchar", { name: "ComRes", nullable: true, length: 100 })
+  @Column("varchar", { name: "ComRes", nullable: false, length: 100 })
   comRes: string | null;
 
-  @Column("int", { name: "AsiIDFK", nullable: true })
+  @Column("int", { name: "AsiIDFK",  nullable: false })
   asiIdfk: number | null;
 
-  @Column("int", { name: "ComiteIDFK", nullable: true })
+  @Column("int", { name: "ComiteIDFK", nullable: false })
   comiteIdfk: number | null;
 
   @ManyToOne(() => Asistente, (asistente) => asistente.compromisos, {

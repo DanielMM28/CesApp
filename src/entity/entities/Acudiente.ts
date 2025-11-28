@@ -1,28 +1,29 @@
-import { Column, Entity, OneToMany } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
 import { ApreAcu } from "./ApreAcu";
 
 @Entity("acudiente", { schema: "bdcomite" })
 export class Acudiente {
-  @Column("varchar", { primary: true, name: "AcuDoc", length: 20 })
+
+  @PrimaryColumn({ type: "varchar", name: "AcuDoc", length: 20 })
   acuDoc: string;
 
-  @Column("varchar", { name: "AcuNom", nullable: true, length: 100 })
-  acuNom: string | null;
+  @Column("varchar", { name: "AcuNom", length: 100 })
+  acuNom: string;
 
-  @Column("varchar", { name: "AcuApe", nullable: true, length: 100 })
-  acuApe: string | null;
+  @Column("varchar", { name: "AcuApe", length: 100 })
+  acuApe: string;
 
-  @Column("varchar", { name: "AcuCor", nullable: true, length: 100 })
-  acuCor: string | null;
+  @Column("varchar", { name: "AcuCor", length: 100 })
+  acuCor: string;
 
-  @Column("varchar", { name: "AcuTel", nullable: true, length: 20 })
-  acuTel: string | null;
+  @Column("varchar", { name: "AcuTel", length: 20 })
+  acuTel: string;
 
-  @Column("varchar", { name: "AcuDir", nullable: true, length: 150 })
-  acuDir: string | null;
+  @Column("varchar", { name: "AcuDir", length: 150 })
+  acuDir: string;
 
-  @Column("varchar", { name: "AcuBarr", nullable: true, length: 100 })
-  acuBarr: string | null;
+  @Column("varchar", { name: "AcuBarr", length: 100 })
+  acuBarr: string;
 
   @OneToMany(() => ApreAcu, (apreAcu) => apreAcu.acuDocFk2)
   apreAcus: ApreAcu[];

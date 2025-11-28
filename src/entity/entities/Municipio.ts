@@ -15,10 +15,10 @@ export class Municipio {
   @Column("int", { primary: true, name: "MunID" })
   munId: number;
 
-  @Column("varchar", { name: "MunDes", nullable: true, length: 100 })
+  @Column("varchar", { name: "MunDes", nullable: false, length: 100 })
   munDes: string | null;
 
-  @Column("int", { name: "DepIDFK", nullable: true })
+  @Column("int", { name: "DepIDFK",  nullable: false })
   depIdfk: number | null;
 
   @OneToMany(() => Centro, (centro) => centro.munIdfk2)

@@ -1,8 +1,8 @@
 import express from "express";
-import { AprendizController } from "../controllers/AprendizController";
+import { UsuariosController } from "../controllers/Usuarioscontroller";
 
 const router = express.Router();
-const controller = new AprendizController();
+const controller = new UsuariosController();
 
 router.get("/", controller.obtenerTodos);
 
@@ -13,7 +13,5 @@ router.post("/", controller.crear);
 router.put("/:id", controller.actualizar);
 
 router.delete("/:id", controller.eliminar);
-
-
 
 export default router;

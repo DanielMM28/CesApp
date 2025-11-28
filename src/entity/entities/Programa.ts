@@ -7,22 +7,22 @@ export class Programa {
   @Column("int", { primary: true, name: "ProID" })
   proId: number;
 
-  @Column("varchar", { name: "ProNomCor", nullable: true, length: 100 })
+  @Column("varchar", { name: "ProNomCor", nullable:false, length: 100 })
   proNomCor: string | null;
 
-  @Column("varchar", { name: "ProNomLar", nullable: true, length: 150 })
+  @Column("varchar", { name: "ProNomLar", nullable: false, length: 150 })
   proNomLar: string | null;
 
-  @Column("varchar", { name: "ProTipo", nullable: true, length: 100 })
+  @Column("varchar", { name: "ProTipo", nullable: false, length: 100 })
   proTipo: string | null;
 
-  @Column("varchar", { name: "ProCod", nullable: true, length: 50 })
+  @Column("varchar", { name: "ProCod", nullable: false, length: 50 })
   proCod: string | null;
 
-  @Column("varchar", { name: "ProVer", nullable: true, length: 20 })
+  @Column("varchar", { name: "ProVer", nullable: false, length: 20 })
   proVer: string | null;
 
-  @Column("int", { name: "ProDur", nullable: true })
+  @Column("int", { name: "ProDur", nullable: false })
   proDur: number | null;
 
   @OneToMany(() => Ficha, (ficha) => ficha.proIdfk2)

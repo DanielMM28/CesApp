@@ -6,7 +6,7 @@ export class Departamento {
   @Column("int", { primary: true, name: "DepID" })
   depId: number;
 
-  @Column("varchar", { name: "DepDes", nullable: true, length: 100 })
+  @Column("varchar", { name: "DepDes",  nullable: false, length: 100 })
   depDes: string | null;
 
   @OneToMany(() => Municipio, (municipio) => municipio.depIdfk2)

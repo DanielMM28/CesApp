@@ -1,7 +1,6 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 
-// Importa todas tus entidades
 import { Aprendiz } from "./entity/entities/Aprendiz";
 import { ApreAcu } from "./entity/entities/ApreAcu";
 import { ProCom } from "./entity/entities/ProCom";
@@ -32,18 +31,14 @@ import { Reportecomite } from "./entity/entities/Reportecomite";
 import { Resultado } from "./entity/entities/Resultado";
 
 
-
-
-// agrega las demás entidades si las tienes...
-
 export const AppDataSource = new DataSource({
   type: "mysql",
   host: "localhost",
   port: 3306,
   username: "root",
-  password: "", // o la contraseña que uses
+  password: "", 
   database: "bdcomite",
-  synchronize: false, // ⚠️ usa true solo para desarrollo (crea tablas automáticamente)
+  synchronize: false, 
   logging: false,
   entities: [
     Aprendiz,

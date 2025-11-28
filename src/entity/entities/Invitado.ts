@@ -6,13 +6,13 @@ export class Invitado {
   @Column("int", { primary: true, name: "InvID" })
   invId: number;
 
-  @Column("varchar", { name: "InvNom", nullable: true, length: 100 })
+  @Column("varchar", { name: "InvNom",  nullable: false, length: 100 })
   invNom: string | null;
 
-  @Column("varchar", { name: "InvCar", nullable: true, length: 100 })
+  @Column("varchar", { name: "InvCar", nullable: false, length: 100 })
   invCar: string | null;
 
-  @Column("varchar", { name: "InvEnt", nullable: true, length: 100 })
+  @Column("varchar", { name: "InvEnt",  nullable: false, length: 100 })
   invEnt: string | null;
 
   @ManyToMany(() => Acta, (acta) => acta.invitados)
